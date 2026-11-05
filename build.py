@@ -30,15 +30,17 @@ def layout(slug, title, description, body):
         '<a href="%s%s/"%s>%s</a>' % (pre, s, ' aria-current="page"' if s == slug else "", name)
         for s, _, name, _ in SECTIONS
     )
-    pager = ""
+    nxt = ""
     slugs = [s[0] for s in SECTIONS]
     if slug in slugs:
         i = slugs.index(slug)
         if i + 1 < len(SECTIONS):
-            s, n, name, _ = SECTIONS[i + 1]
-            pager = f'<nav class="pager"><a href="{pre}{s}/">Next · {n} · {name} →</a></nav>'
+            s, n, name, d = SECTIONS[i + 1]
+            nxt = (f'<a class="next" href="{pre}{s}/"><span class="label accent">Next · {n} · {name}</span>'
+                   f'<span class="teaser">{d}</span><span class="arrow" aria-hidden="true">→</span></a>')
         else:
-            pager = f'<nav class="pager"><a href="{pre}">Back to the start →</a></nav>'
+            nxt = (f'<a class="next" href="{pre}"><span class="label accent">Back · Home</span>'
+                   f'<span class="teaser">Return to the start.</span><span class="arrow" aria-hidden="true">→</span></a>')
     full_title = "Jordan Teague" if not slug else f"{title} · Jordan Teague"
     return f"""<!doctype html>
 <html lang="en">
@@ -47,7 +49,7 @@ def layout(slug, title, description, body):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{full_title}</title>
 <meta name="description" content="{description}">
-<meta name="theme-color" content="#f6f4ef">
+<meta name="theme-color" content="#f8f7f3">
 <meta property="og:title" content="{full_title}">
 <meta property="og:description" content="{description}">
 <meta property="og:url" content="{url}">
@@ -56,169 +58,175 @@ def layout(slug, title, description, body):
 <link rel="icon" href="{FAVICON}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{pre}style.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="site">
-  <a class="name" href="{pre or './'}">Jordan Teague</a>
+<header class="site"><div class="wrap">
+  <a class="name" href="{pre or './'}">Jordan Teague<span class="slash" aria-hidden="true"> /</span></a>
   <nav>{nav}</nav>
-</header>
-<main id="main">
+</div></header>
+<main id="main" class="wrap">
 {body}
-{pager}
+{nxt}
 </main>
-<footer class="site">
-  <p><a href="mailto:{EMAIL}">{EMAIL}</a> · {ext("https://www.linkedin.com/in/jordanteague", "LinkedIn")} · {ext("https://github.com/jordanteague", "GitHub")}</p>
-  <p class="fine">© 2026 Jordan Teague. Personal site. Views are my own and not those of Campbell Teague or its clients. Nothing on this site is legal advice, and visiting it does not create an attorney-client relationship.</p>
-</footer>
+<footer class="site"><div class="wrap">
+  <p><a href="mailto:{EMAIL}">{EMAIL}</a> · <a href="https://www.linkedin.com/in/jordanteague">LinkedIn</a> · <a href="https://github.com/jordanteague">GitHub</a></p>
+  <p>© 2026 Jordan Teague. Personal site. Views are my own and not those of Campbell Teague or its clients. Nothing on this site is legal advice, and visiting it does not create an attorney-client relationship.</p>
+</div></footer>
 </body>
 </html>
 """
 
 
-def page_head(num, name, h1, intro):
-    return f'<p class="eyebrow">{num} · {name}</p>\n<h1>{h1}</h1>\n<p class="intro">{intro}</p>'
+def page(num, name, rail, h1, intro, content):
+    """Interior page: left rail with the section label, main column with the content."""
+    return f"""<div class="page">
+  <aside class="rail"><p class="label accent">{num} · {name}</p><p class="rail-note">{rail}</p></aside>
+  <div class="col">
+    <h1>{h1}</h1>
+    <p class="lead">{intro}</p>
+    {content}
+  </div>
+</div>"""
 
 
 # ---------- Home ----------
 index_rows = "".join(
     f'<li><a href="{s}/"><span class="num">{n}</span><span class="sec">{name}</span>'
-    f'<span class="desc">{d} →</span></a></li>'
+    f'<span class="desc">{d}</span><span class="arrow" aria-hidden="true">→</span></a></li>'
     for s, n, name, d in SECTIONS
 )
+BLOOMBERG_2026 = "https://news.bloomberglaw.com/legal-exchange-insights-and-commentary/legal-mentorship-was-already-broken-ai-just-made-it-obvious"
 home = f"""
 <section class="hero">
   <h1 class="big">Lawyer, founder, and builder of legal AI systems.</h1>
-  <p>I co-founded {ext("https://campbellteague.com/jordan-teague/", "Campbell Teague")}, a Chambers-ranked firm that advises emerging-technology organizations on questions without settled answers, from token issuance under MiCA to decentralized protocol governance.</p>
-  <p>I also build the tools. Most of my recent work turns legal judgment into something AI agents can apply consistently: clearance searches, discovery review, and the playbooks behind them.</p>
+  <a class="callout" href="{BLOOMBERG_2026}">Bloomberg Law · Legal Mentorship Was Already Broken. AI Just Made It Obvious. →</a>
+  <p>I'm the founding partner and chief strategy officer of <a href="https://campbellteague.com/jordan-teague/">Campbell Teague</a>, a Chambers-ranked firm that advises emerging-technology organizations on questions without settled answers, from token issuance under MiCA to decentralized protocol governance.</p>
+  <p>I also build the tools. My recent work turns legal judgment into something AI agents can apply consistently: trademark clearance, discovery review, and the playbooks behind them. All of it is open source.</p>
+  <p class="label accent">Emerging technology law · Legal AI</p>
 </section>
 
 <section class="currently">
-  <h2>Currently</h2>
-  <dl>
-    <dt>Practicing.</dt><dd>Founding Partner and Chief Strategy Officer at Campbell Teague, advising emerging-technology organizations in the U.S. and abroad.</dd>
-    <dt>Building.</dt><dd><a href="building/">Open-source Claude skills</a> for trademark clearance, discovery review, and compiling lawyers' judgment into AI playbooks.</dd>
-    <dt>Writing.</dt><dd>{ext("https://news.bloomberglaw.com/legal-exchange-insights-and-commentary/legal-mentorship-was-already-broken-ai-just-made-it-obvious", "“Legal Mentorship Was Already Broken. AI Just Made It Obvious.”")} in Bloomberg Law.</dd>
-  </dl>
+  <p class="label">Currently</p>
+  <p><b>Practicing.</b> Advising emerging-technology organizations at <a href="https://campbellteague.com/jordan-teague/">Campbell Teague</a>.</p>
+  <p><b>Building.</b> <a href="building/">Open-source Claude skills</a> for trademark clearance and discovery review.</p>
+  <p><b>Writing.</b> On AI and the legal profession in <a href="writing/">Bloomberg Law</a>.</p>
 </section>
 
-<section>
-  <h2>Contents</h2>
+<section class="index-wrap">
   <ul class="index">{index_rows}</ul>
-</section>
-
-<section>
-  <h2>Selected work</h2>
-  <ul class="selected">
-    <li><span class="label">Claude skill · open source</span><a href="building/#tmrex">TMrex: U.S. trademark clearance →</a></li>
-    <li><span class="label">Claude skill · open source</span><a href="building/#rogbuster">ROGbuster: discovery response review →</a></li>
-    <li><span class="label">Specification · open source</span><a href="building/#judgment-compiler">Judgment Compiler →</a></li>
-  </ul>
 </section>
 """
 
 # ---------- Building ----------
-def project(pid, name, meta, paras, link):
-    rows = "".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in meta)
-    ps = "".join(f"<p>{p}</p>" for p in paras)
+def project(pid, name, label, meta, paras, link):
+    rows = "".join(f"<div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in meta)
+    ps = "".join(f"<p>{x}</p>" for x in paras)
     return f"""<article class="project" id="{pid}">
+  <p class="label accent">{label}</p>
   <h2>{name}</h2>
-  <dl class="meta">{rows}</dl>
   {ps}
-  <p class="links">{ext(link, "Repository")}</p>
+  <dl class="meta">{rows}<div><dt>Source</dt><dd><a href="{link}">{link.replace("https://", "")}</a></dd></div></dl>
 </article>"""
 
-building = page_head("01", "Building", "Legal AI, built in the open",
-                     "Each of these encodes a piece of legal judgment so an AI agent can apply it the same way every time. All are open source.") + "\n"
-building += project("tmrex", "TMrex",
-    [("What", "Claude skill"), ("Practice area", "U.S. trademark clearance"), ("Scope", "Screening-level search and registrability report")],
-    ["Searches a local copy of the full USPTO register, about 14 million case files, synced twice a day. It also searches the web and domain names for unregistered use, then reports on registrability issues."],
-    "https://github.com/jordanteague/TMrex")
-building += project("rogbuster", "ROGbuster",
-    [("What", "Claude skill"), ("Practice area", "Litigation discovery")],
-    ["Reviews the other side's discovery responses, flags every gap, and drafts the meet-and-confer letter."],
-    "https://github.com/jordanteague/ROGbuster")
-building += project("judgment-compiler", "Judgment Compiler",
-    [("What", "Platform-neutral specification and Claude skill"), ("Output", "Schema-validated playbooks for AI review agents")],
-    ["Compiles a lawyer's judgment, captured from an interview or a starting draft, into a structured playbook that AI review agents can apply consistently."],
-    "https://github.com/jordanteague/judgment-compiler")
-building += project("trademarkbench", "TrademarkBench",
-    [("What", "Pilot benchmark"), ("Status", "Pilot; results are directional"), ("Sample", "90 applications examined after the model's training cutoff")],
-    ["Tests whether Claude can predict USPTO trademark examination outcomes, with and without trademark-register search, scored against real examiner decisions."],
-    "https://github.com/jordanteague/trademarkbench")
-building += f"""
-<article class="project" id="also">
-  <h2>Also built</h2>
+projects = "".join([
+    project("tmrex", "TMrex", "Claude skill · Trademark clearance",
+        [("Scope", "Screening-level U.S. clearance"), ("Searches", "USPTO register, web, domain names"), ("Released as", "Open source")],
+        ["Screens a proposed mark and reports on registrability. It searches a local copy of the full USPTO register, about 14 million case files synced twice a day, plus the web and domain names for unregistered use."],
+        "https://github.com/jordanteague/TMrex"),
+    project("rogbuster", "ROGbuster", "Claude skill · Discovery review",
+        [("Input", "The other side's discovery responses"), ("Output", "Gap list and meet-and-confer letter"), ("Released as", "Open source")],
+        ["Reads the other side's discovery responses, flags every gap, and drafts the meet-and-confer letter."],
+        "https://github.com/jordanteague/ROGbuster"),
+    project("judgment-compiler", "Judgment Compiler", "Specification + Claude skill · AI playbooks",
+        [("Input", "An interview or a starting draft"), ("Output", "Schema-validated playbooks"), ("Platform", "Neutral; ships with a Claude skill")],
+        ["Compiles a lawyer's judgment into a structured playbook that AI review agents can apply consistently, so expertise is written down once and reused across workflows."],
+        "https://github.com/jordanteague/judgment-compiler"),
+    project("trademarkbench", "TrademarkBench", "Pilot benchmark · Evaluation",
+        [("Question", "Can Claude predict USPTO examination outcomes?"), ("Sample", "90 applications examined after the model's training cutoff"), ("Status", "Pilot; results are directional")],
+        ["Scores Claude's predictions against real examiner decisions, with and without trademark-register search."],
+        "https://github.com/jordanteague/trademarkbench"),
+])
+also = f"""<article class="project" id="also">
+  <p class="label accent">Also built</p>
   <ul class="plain">
-    <li><strong>Layered AI architecture for law firm work.</strong> Applied DRY software-design principles to Microsoft Copilot agents, separating orchestration, reusable expert playbooks, and matter-specific context.</li>
-    <li><strong>Automated context pipelines.</strong> Power Automate pipelines that ingest and structure public information as client-specific context for Copilot-based legal review.</li>
-    <li><strong>Clio dashboards.</strong> OAuth-integrated practice dashboards, first built conventionally and later with Claude.</li>
-    <li><strong>Smart contracts.</strong> Solidity contracts in {ext("https://github.com/lexDAO/LexCorpus/commits?author=jordanteague", "LexDAO's contract library")} and front-end code for a {ext("https://github.com/lexDAO/Kali/commits?author=jordanteague", "DAO-formation app")}.</li>
-    <li><strong>Earlier products.</strong> iOS and SaaS apps shipped years before AI coding tools existed.</li>
+    <li><b>Layered AI architecture for law firm work.</b> Applied DRY software-design principles to Microsoft Copilot agents, separating orchestration, reusable expert playbooks, and matter-specific context.</li>
+    <li><b>Automated context pipelines.</b> Power Automate pipelines that ingest and structure public information as client-specific context for Copilot-based legal review.</li>
+    <li><b>Clio dashboards.</b> OAuth-integrated practice dashboards, first built conventionally and later with Claude.</li>
+    <li><b>Smart contracts.</b> Solidity contracts in <a href="https://github.com/lexDAO/LexCorpus/commits?author=jordanteague">LexDAO's contract library</a> and front-end code for a <a href="https://github.com/lexDAO/Kali/commits?author=jordanteague">DAO-formation app</a>.</li>
+    <li><b>Earlier products.</b> iOS and SaaS apps shipped years before AI coding tools existed.</li>
   </ul>
-</article>
-"""
+</article>"""
+building = page("01", "Building", "Open-source tools that encode legal judgment for AI agents.",
+                "Legal AI, built in the open",
+                "Each of these takes a piece of a lawyer's judgment and makes it something an AI agent can apply the same way every time.",
+                projects + also)
 
 # ---------- Writing ----------
 WRITING = [
-    ("Bloomberg Law", "2026", "Legal Mentorship Was Already Broken. AI Just Made It Obvious.", "https://news.bloomberglaw.com/legal-exchange-insights-and-commentary/legal-mentorship-was-already-broken-ai-just-made-it-obvious", "AI & the profession"),
+    ("Bloomberg Law", "2026", "Legal Mentorship Was Already Broken. AI Just Made It Obvious.", "https://news.bloomberglaw.com/legal-exchange-insights-and-commentary/legal-mentorship-was-already-broken-ai-just-made-it-obvious", "AI and the profession"),
     ("LinkedIn", "2026", "Your AI Agent Gave the Right Answer. Did It Use the Right Context?", "https://www.linkedin.com/pulse/your-ai-agent-gave-right-answer-did-use-context-jordan-teague-rudte/", "AI agents"),
     ("Bloomberg Law", "2024", "Law Firms Should Ditch the Rigid Mindset for a Disruptive Model", "https://news.bloomberglaw.com/us-law-week/law-firms-should-ditch-the-rigid-mindset-for-a-disruptive-model", "Firm models"),
     ("Other Internet", "2022", "Effective Accountability for Uniswap Governance", "https://otherinter.net/research/uniswap-accountability/", "DAO governance"),
     ("The Defiant", "2022", "Starting a DAO in the USA? Steer Clear of DAO Legislation", "https://thedefiant.io/news/research-and-opinion/starting-a-dao-in-the-usa-steer-clear-of-dao-legislation", "DAO formation"),
-    ("Case Western Reserve Journal of Law, Technology & the Internet", "2012", "Saving the Spotify Revolution: Recalibrating the Power Imbalance in Digital Copyright", "https://scholarlycommons.law.case.edu/jolti/vol4/iss1/8/", "Copyright"),
-    ("Vanderbilt Journal of Entertainment & Technology Law", "2012", "Promoting Trademark's Ends and Means through Online Contributory Liability", "https://scholarship.law.vanderbilt.edu/jetlaw/vol14/iss2/6/", "Trademark"),
+    ("Case W. Res. J.L. Tech. &amp; Internet", "2012", "Saving the Spotify Revolution: Recalibrating the Power Imbalance in Digital Copyright", "https://scholarlycommons.law.case.edu/jolti/vol4/iss1/8/", "Copyright · law review"),
+    ("Vand. J. Ent. &amp; Tech. L.", "2012", "Promoting Trademark's Ends and Means through Online Contributory Liability", "https://scholarship.law.vanderbilt.edu/jetlaw/vol14/iss2/6/", "Trademark · law review"),
 ]
-items = "".join(
-    f'<li><p class="meta">{o.replace("&", "&amp;")} · {y}</p>{ext(u, t)}<p class="tag">{tag.replace("&", "&amp;")}</p></li>'
-    for o, y, t, u, tag in WRITING
-)
-writing = page_head("02", "Writing", "Selected writing",
-                    "Columns and essays on how law firms and lawyers should adapt to AI, earlier work on DAO governance, and two law review articles.") + f'\n<ul class="pubs">{items}</ul>'
+def entries(rows):
+    out = ""
+    for outlet, year, title, url, note in rows:
+        t = f'<a href="{url}">{title}</a>' if url else title
+        n = f'<p class="note">{note}</p>' if note else ""
+        when = outlet + (f" · {year}" if year else "")
+        out += f'<li><p class="when">{when}</p><div><p class="t">{t}</p>{n}</div></li>'
+    return f'<ul class="entries">{out}</ul>'
+
+writing = page("02", "Writing", "Columns, essays, and law review articles.",
+               "Selected writing",
+               "On how lawyers and law firms should adapt to AI, earlier work on DAO governance, and two law review articles.",
+               entries(WRITING))
 
 # ---------- Speaking ----------
 SPEAKING = [
-    # (venue, year, title, url or None, note)
-    ("Antifirm Podcast", "", "Antifirm Podcast", None, "TODO: link and one line from Jordan"),
-    ("Fordham Law School Blockchain Regulatory Symposium", "2024", "Building for a Bright Future from a Dark Forest", None, "Panelist on AI agent personhood and related topics."),
-    ("Law at the Limits (ETHDenver side event)", "2024", "AI, agents, DAOs, and smart contracts", None, "AI agents in DAO governance: AI-controlled capital, manipulation risk, and who bears responsibility when AI acts for a DAO."),
-    ("Greenville Bar Association Year-End CLE", "2024", "The Intelligence Is Artificial, but the Risks Are Real", None, "AI over-reliance and practical risk mitigation."),
-    ("DAOPlanet NYC", "2023", "Decentralized governance", None, ""),
-    ("Law of Code podcast", "2022", "DAO structuring and legal engineering", "https://podcasts.apple.com/us/podcast/49-jordan-teague-dao-structuring-legal-engineering/id1578287932?i=1000566269454", ""),
-    ("The Encrypted Economy podcast", "2022", "Taking the “ow” out of DAOs", "https://podcasts.apple.com/us/podcast/taking-the-ow-out-of-daos-ross-campbell-and/id1541074732?i=1000555577411", ""),
-    ("American Bar Association CLE webinar", "2022", "Legal Governance of Digital Autonomous Organizations", None, "Panelist."),
+    # TODO(Jordan): Antifirm Podcast link and one line
+    ("Antifirm Podcast", "", "Antifirm Podcast", None, ""),
+    ("Fordham Law School", "2024", "Building for a Bright Future from a Dark Forest", None, "Blockchain Regulatory Symposium. Panelist on AI agent personhood."),
+    ("ETHDenver", "2024", "AI, agents, DAOs, and smart contracts", None, "Law at the Limits. AI-controlled capital, manipulation risk, and who bears responsibility when AI acts for a DAO."),
+    ("Greenville Bar Assn.", "2024", "The Intelligence Is Artificial, but the Risks Are Real", None, "Year-end CLE on AI over-reliance and practical risk mitigation."),
+    ("DAOPlanet NYC", "2023", "Legal engineering and decentralized governance", None, ""),
+    ("Law of Code", "2022", "DAO structuring and legal engineering", "https://podcasts.apple.com/us/podcast/49-jordan-teague-dao-structuring-legal-engineering/id1578287932?i=1000566269454", "Podcast"),
+    ("The Encrypted Economy", "2022", "Taking the “ow” out of DAOs", "https://podcasts.apple.com/us/podcast/taking-the-ow-out-of-daos-ross-campbell-and/id1541074732?i=1000555577411", "Podcast"),
+    ("American Bar Assn.", "2022", "Legal Governance of Digital Autonomous Organizations", None, "CLE webinar. Panelist."),
 ]
-sp = ""
-for venue, year, title, url, note in SPEAKING:
-    t = ext(url, title) if url else f'<span class="title">{title}</span>'
-    m = venue + (f" · {year}" if year else "")
-    n = f'<p class="tag">{note}</p>' if note and not note.startswith("TODO") else ""
-    if note.startswith("TODO"):
-        sp += f"<!-- {note} -->"
-    sp += f'<li><p class="meta">{m}</p>{t}{n}</li>'
-speaking = page_head("03", "Speaking", "Talks, panels, and podcasts",
-                     "On AI agents, decentralized governance, and the practice of legal engineering.") + f'\n<ul class="pubs">{sp}</ul>'
+speaking = page("03", "Speaking", "Talks, panels, and podcasts.",
+                "Talks and panels",
+                "On AI agents, decentralized governance, and the practice of legal engineering.",
+                entries(SPEAKING))
 
 # ---------- About ----------
-about = page_head("04", "About", "Practice and background",
-                  "I've practiced law since 2012 and co-founded Campbell Teague in 2016.") + f"""
+TIMELINE = [
+    ("2016–now", "Campbell Teague", "Founding Partner & Chief Strategy Officer", True),
+    ("2012–2016", "Burr &amp; Forman LLP", "Associate", False),
+    ("J.D.", "Vanderbilt Law School", "Senior Technology Editor, Journal of Entertainment &amp; Technology Law", False),
+    ("B.S.", "Furman University", "Mathematics-Economics, magna cum laude", False),
+]
+tl = "".join(f'<li class="{"on" if cur else ""}"><span class="yr">{y}</span><b>{org}</b><span>{role}</span></li>' for y, org, role, cur in TIMELINE)
+about = page("04", "About", f'<ul class="timeline">{tl}</ul>',
+             "Practice and background",
+             "I've practiced law since 2012 and co-founded Campbell Teague in 2016.",
+             f"""
 <h2>Practice</h2>
-<p>As Founding Partner and Chief Strategy Officer of {ext("https://campbellteague.com/jordan-teague/", "Campbell Teague")}, I advise U.S. and international emerging-technology organizations on regulatory frameworks, legal personhood, organizational structure, governance, and which jurisdictions' laws apply.</p>
+<p>I advise U.S. and international emerging-technology organizations on regulatory frameworks, legal personhood, organizational structure, governance, and which jurisdictions' laws apply.</p>
 <p>Recent work includes advising a token issuer under the EU's Markets in Crypto-Assets Regulation during its early implementation, with no precedent or settled guidance, and serving as outside general counsel to The Graph Foundation on decentralized protocol governance.</p>
 <p>In litigation, I've won a federal bench trial and its appeal, tried an international arbitration in Paris, and handled a software copyright dispute spanning competing federal jurisdictions.</p>
-
 <h2>The firm</h2>
-<p>I co-founded the firm with two lawyers and grew it into a U.S. and international team of more than 14. It runs on a project-management model in which project managers lead lawyer teams. The same instinct, to make expert judgment repeatable, runs through the tools I build.</p>
-
-<h2>Education</h2>
-<p>J.D., Vanderbilt University Law School, where I was Senior Technology Editor of the <i>Vanderbilt Journal of Entertainment and Technology Law</i>.<br>B.S., Mathematics-Economics, magna cum laude, Furman University.</p>
-<p class="aside">Admitted in South Carolina and Alabama.</p>
-
+<p>I co-founded <a href="https://campbellteague.com/jordan-teague/">Campbell Teague</a> with two lawyers and grew it into a U.S. and international team of more than 14. It runs on a project-management model in which project managers lead lawyer teams. The same instinct, making expert judgment repeatable, runs through the tools I build.</p>
 <h2>Contact</h2>
 <p><a href="mailto:{EMAIL}">{EMAIL}</a></p>
-"""
+<p class="label">Admitted in South Carolina and Alabama</p>
+""")
 
 PAGES = {
     "": ("Jordan Teague", "Lawyer, founder, and builder of legal AI systems. Co-founder of Campbell Teague.", home),

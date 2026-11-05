@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Building · Jordan Teague</title>
 <meta name="description" content="Open-source legal AI tools by Jordan Teague: TMrex, ROGbuster, Judgment Compiler, and TrademarkBench.">
-<meta name="theme-color" content="#f6f4ef">
+<meta name="theme-color" content="#f8f7f3">
 <meta property="og:title" content="Building · Jordan Teague">
 <meta property="og:description" content="Open-source legal AI tools by Jordan Teague: TMrex, ROGbuster, Judgment Compiler, and TrademarkBench.">
 <meta property="og:url" content="https://jordanteague.com/building/">
@@ -14,56 +14,58 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a1a1a'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' fill='%23f6f4ef' text-anchor='middle'%3EJT%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="site">
-  <a class="name" href="../">Jordan Teague</a>
+<header class="site"><div class="wrap">
+  <a class="name" href="../">Jordan Teague<span class="slash" aria-hidden="true"> /</span></a>
   <nav><a href="../building/" aria-current="page">Building</a><a href="../writing/">Writing</a><a href="../speaking/">Speaking</a><a href="../about/">About</a></nav>
-</header>
-<main id="main">
-<p class="eyebrow">01 · Building</p>
-<h1>Legal AI, built in the open</h1>
-<p class="intro">Each of these encodes a piece of legal judgment so an AI agent can apply it the same way every time. All are open source.</p>
-<article class="project" id="tmrex">
+</div></header>
+<main id="main" class="wrap">
+<div class="page">
+  <aside class="rail"><p class="label accent">01 · Building</p><p class="rail-note">Open-source tools that encode legal judgment for AI agents.</p></aside>
+  <div class="col">
+    <h1>Legal AI, built in the open</h1>
+    <p class="lead">Each of these takes a piece of a lawyer's judgment and makes it something an AI agent can apply the same way every time.</p>
+    <article class="project" id="tmrex">
+  <p class="label accent">Claude skill · Trademark clearance</p>
   <h2>TMrex</h2>
-  <dl class="meta"><dt>What</dt><dd>Claude skill</dd><dt>Practice area</dt><dd>U.S. trademark clearance</dd><dt>Scope</dt><dd>Screening-level search and registrability report</dd></dl>
-  <p>Searches a local copy of the full USPTO register, about 14 million case files, synced twice a day. It also searches the web and domain names for unregistered use, then reports on registrability issues.</p>
-  <p class="links"><a href="https://github.com/jordanteague/TMrex">Repository<span class="ext" aria-hidden="true"> ↗</span></a></p>
+  <p>Screens a proposed mark and reports on registrability. It searches a local copy of the full USPTO register, about 14 million case files synced twice a day, plus the web and domain names for unregistered use.</p>
+  <dl class="meta"><div><dt>Scope</dt><dd>Screening-level U.S. clearance</dd></div><div><dt>Searches</dt><dd>USPTO register, web, domain names</dd></div><div><dt>Released as</dt><dd>Open source</dd></div><div><dt>Source</dt><dd><a href="https://github.com/jordanteague/TMrex">github.com/jordanteague/TMrex</a></dd></div></dl>
 </article><article class="project" id="rogbuster">
+  <p class="label accent">Claude skill · Discovery review</p>
   <h2>ROGbuster</h2>
-  <dl class="meta"><dt>What</dt><dd>Claude skill</dd><dt>Practice area</dt><dd>Litigation discovery</dd></dl>
-  <p>Reviews the other side's discovery responses, flags every gap, and drafts the meet-and-confer letter.</p>
-  <p class="links"><a href="https://github.com/jordanteague/ROGbuster">Repository<span class="ext" aria-hidden="true"> ↗</span></a></p>
+  <p>Reads the other side's discovery responses, flags every gap, and drafts the meet-and-confer letter.</p>
+  <dl class="meta"><div><dt>Input</dt><dd>The other side's discovery responses</dd></div><div><dt>Output</dt><dd>Gap list and meet-and-confer letter</dd></div><div><dt>Released as</dt><dd>Open source</dd></div><div><dt>Source</dt><dd><a href="https://github.com/jordanteague/ROGbuster">github.com/jordanteague/ROGbuster</a></dd></div></dl>
 </article><article class="project" id="judgment-compiler">
+  <p class="label accent">Specification + Claude skill · AI playbooks</p>
   <h2>Judgment Compiler</h2>
-  <dl class="meta"><dt>What</dt><dd>Platform-neutral specification and Claude skill</dd><dt>Output</dt><dd>Schema-validated playbooks for AI review agents</dd></dl>
-  <p>Compiles a lawyer's judgment, captured from an interview or a starting draft, into a structured playbook that AI review agents can apply consistently.</p>
-  <p class="links"><a href="https://github.com/jordanteague/judgment-compiler">Repository<span class="ext" aria-hidden="true"> ↗</span></a></p>
+  <p>Compiles a lawyer's judgment into a structured playbook that AI review agents can apply consistently, so expertise is written down once and reused across workflows.</p>
+  <dl class="meta"><div><dt>Input</dt><dd>An interview or a starting draft</dd></div><div><dt>Output</dt><dd>Schema-validated playbooks</dd></div><div><dt>Platform</dt><dd>Neutral; ships with a Claude skill</dd></div><div><dt>Source</dt><dd><a href="https://github.com/jordanteague/judgment-compiler">github.com/jordanteague/judgment-compiler</a></dd></div></dl>
 </article><article class="project" id="trademarkbench">
+  <p class="label accent">Pilot benchmark · Evaluation</p>
   <h2>TrademarkBench</h2>
-  <dl class="meta"><dt>What</dt><dd>Pilot benchmark</dd><dt>Status</dt><dd>Pilot; results are directional</dd><dt>Sample</dt><dd>90 applications examined after the model's training cutoff</dd></dl>
-  <p>Tests whether Claude can predict USPTO trademark examination outcomes, with and without trademark-register search, scored against real examiner decisions.</p>
-  <p class="links"><a href="https://github.com/jordanteague/trademarkbench">Repository<span class="ext" aria-hidden="true"> ↗</span></a></p>
-</article>
-<article class="project" id="also">
-  <h2>Also built</h2>
+  <p>Scores Claude's predictions against real examiner decisions, with and without trademark-register search.</p>
+  <dl class="meta"><div><dt>Question</dt><dd>Can Claude predict USPTO examination outcomes?</dd></div><div><dt>Sample</dt><dd>90 applications examined after the model's training cutoff</dd></div><div><dt>Status</dt><dd>Pilot; results are directional</dd></div><div><dt>Source</dt><dd><a href="https://github.com/jordanteague/trademarkbench">github.com/jordanteague/trademarkbench</a></dd></div></dl>
+</article><article class="project" id="also">
+  <p class="label accent">Also built</p>
   <ul class="plain">
-    <li><strong>Layered AI architecture for law firm work.</strong> Applied DRY software-design principles to Microsoft Copilot agents, separating orchestration, reusable expert playbooks, and matter-specific context.</li>
-    <li><strong>Automated context pipelines.</strong> Power Automate pipelines that ingest and structure public information as client-specific context for Copilot-based legal review.</li>
-    <li><strong>Clio dashboards.</strong> OAuth-integrated practice dashboards, first built conventionally and later with Claude.</li>
-    <li><strong>Smart contracts.</strong> Solidity contracts in <a href="https://github.com/lexDAO/LexCorpus/commits?author=jordanteague">LexDAO's contract library<span class="ext" aria-hidden="true"> ↗</span></a> and front-end code for a <a href="https://github.com/lexDAO/Kali/commits?author=jordanteague">DAO-formation app<span class="ext" aria-hidden="true"> ↗</span></a>.</li>
-    <li><strong>Earlier products.</strong> iOS and SaaS apps shipped years before AI coding tools existed.</li>
+    <li><b>Layered AI architecture for law firm work.</b> Applied DRY software-design principles to Microsoft Copilot agents, separating orchestration, reusable expert playbooks, and matter-specific context.</li>
+    <li><b>Automated context pipelines.</b> Power Automate pipelines that ingest and structure public information as client-specific context for Copilot-based legal review.</li>
+    <li><b>Clio dashboards.</b> OAuth-integrated practice dashboards, first built conventionally and later with Claude.</li>
+    <li><b>Smart contracts.</b> Solidity contracts in <a href="https://github.com/lexDAO/LexCorpus/commits?author=jordanteague">LexDAO's contract library</a> and front-end code for a <a href="https://github.com/lexDAO/Kali/commits?author=jordanteague">DAO-formation app</a>.</li>
+    <li><b>Earlier products.</b> iOS and SaaS apps shipped years before AI coding tools existed.</li>
   </ul>
 </article>
-
-<nav class="pager"><a href="../writing/">Next · 02 · Writing →</a></nav>
+  </div>
+</div>
+<a class="next" href="../writing/"><span class="label accent">Next · 02 · Writing</span><span class="teaser">Bloomberg Law columns, essays, and law review articles on law, AI, and governance.</span><span class="arrow" aria-hidden="true">→</span></a>
 </main>
-<footer class="site">
-  <p><a href="mailto:jordan@campbellteague.com">jordan@campbellteague.com</a> · <a href="https://www.linkedin.com/in/jordanteague">LinkedIn<span class="ext" aria-hidden="true"> ↗</span></a> · <a href="https://github.com/jordanteague">GitHub<span class="ext" aria-hidden="true"> ↗</span></a></p>
-  <p class="fine">© 2026 Jordan Teague. Personal site. Views are my own and not those of Campbell Teague or its clients. Nothing on this site is legal advice, and visiting it does not create an attorney-client relationship.</p>
-</footer>
+<footer class="site"><div class="wrap">
+  <p><a href="mailto:jordan@campbellteague.com">jordan@campbellteague.com</a> · <a href="https://www.linkedin.com/in/jordanteague">LinkedIn</a> · <a href="https://github.com/jordanteague">GitHub</a></p>
+  <p>© 2026 Jordan Teague. Personal site. Views are my own and not those of Campbell Teague or its clients. Nothing on this site is legal advice, and visiting it does not create an attorney-client relationship.</p>
+</div></footer>
 </body>
 </html>
