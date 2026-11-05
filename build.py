@@ -10,7 +10,7 @@ SECTIONS = [
     # slug, number, name, one-line description
     ("building", "01", "Building", "Open-source AI tools that turn legal judgment into something agents can run."),
     ("writing", "02", "Writing", "Bloomberg Law columns, essays, and law review articles on law, AI, and governance."),
-    ("speaking", "03", "Speaking", "Talks, panels, and podcasts on AI agents, DAOs, and legal engineering."),
+    ("speaking", "03", "Speaking", "The ANTIFIRM podcast, plus talks and panels on AI agents, DAOs, and legal engineering."),
     ("about", "04", "About", "Practice, background, and how to reach me."),
 ]
 
@@ -101,11 +101,14 @@ index_rows = "".join(
 BLOOMBERG_2026 = "https://news.bloomberglaw.com/legal-exchange-insights-and-commentary/legal-mentorship-was-already-broken-ai-just-made-it-obvious"
 home = f"""
 <section class="hero">
+  <div class="hero-text">
   <h1 class="big">Lawyer, founder, and builder of legal AI systems.</h1>
   <a class="callout" href="{BLOOMBERG_2026}">Bloomberg Law · Legal Mentorship Was Already Broken. AI Just Made It Obvious. →</a>
   <p>I'm the founding partner and chief strategy officer of <a href="https://campbellteague.com/jordan-teague/">Campbell Teague</a>, a Chambers-ranked firm that advises emerging-technology organizations on questions without settled answers, from token issuance under MiCA to decentralized protocol governance.</p>
   <p>I also build the tools. My recent work turns legal judgment into something AI agents can apply consistently: trademark clearance, discovery review, and the playbooks behind them. All of it is open source.</p>
   <p class="label accent">Emerging technology law · Legal AI</p>
+  </div>
+  <figure class="portrait"><img src="images/portrait.jpg" alt="Portrait of Jordan Teague" width="460" height="460"><figcaption><span>Jordan Teague</span><span>Campbell Teague</span></figcaption></figure>
 </section>
 
 <section class="currently">
@@ -190,8 +193,7 @@ writing = page("02", "Writing", "Columns, essays, and law review articles.",
 
 # ---------- Speaking ----------
 SPEAKING = [
-    # TODO(Jordan): Antifirm Podcast link and one line
-    ("Antifirm Podcast", "", "Antifirm Podcast", None, ""),
+    ("ANTIFIRM", "2026", "ANTIFIRM podcast", "https://antifirm.com/", "Co-host, with George Campbell. A podcast about the things that sound boring, until they're your problem."),
     ("Fordham Law School", "2024", "Building for a Bright Future from a Dark Forest", None, "Blockchain Regulatory Symposium. Panelist on AI agent personhood."),
     ("ETHDenver", "2024", "AI, agents, DAOs, and smart contracts", None, "Law at the Limits. AI-controlled capital, manipulation risk, and who bears responsibility when AI acts for a DAO."),
     ("Greenville Bar Assn.", "2024", "The Intelligence Is Artificial, but the Risks Are Real", None, "Year-end CLE on AI over-reliance and practical risk mitigation."),
