@@ -140,7 +140,7 @@ projects = "".join([
         ["Screens a proposed mark and reports on registrability. It searches a local copy of the full USPTO register, about 14 million case files synced twice a day, plus the web and domain names for unregistered use."],
         "https://github.com/jordanteague/TMrex"),
     project("rogbuster", "ROGbuster", "Claude skill · Discovery review",
-        [("Input", "The other side's discovery responses"), ("Output", "Gap list and meet-and-confer letter"), ("Released as", "Open source")],
+        [("Input", "The other side's discovery responses"), ("Output", "Gap list and meet-and-confer letter"), ("Released as", "Open source"), ("Website", '<a href="https://rogbuster.com">rogbuster.com</a>')],
         ["Reads the other side's discovery responses, flags every gap, and drafts the meet-and-confer letter."],
         "https://github.com/jordanteague/ROGbuster"),
     project("judgment-compiler", "Judgment Compiler", "Specification + Claude skill · AI playbooks",
