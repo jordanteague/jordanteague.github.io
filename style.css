@@ -1,0 +1,55 @@
+:root {
+  --bg: #f6f4ef;
+  --fg: #1a1a1a;
+  --muted: #6b6760;
+  --rule: #dcd8cf;
+  --accent: #8a2c1d;
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #151514;
+    --fg: #e9e6df;
+    --muted: #9a958c;
+    --rule: #2d2c29;
+    --accent: #e08a72;
+  }
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--serif);
+  font-size: 1.1875rem;
+  line-height: 1.6;
+  font-optical-sizing: auto;
+}
+main { max-width: 40rem; margin: 0 auto; padding: 5rem 1.25rem 4rem; }
+a { color: inherit; text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 0.18em; text-decoration-thickness: 1px; transition: text-decoration-color .15s; }
+a:hover { text-decoration-color: var(--accent); }
+h1 { font-weight: 500; font-size: 2.5rem; line-height: 1.1; letter-spacing: -0.01em; margin: 0 0 .4rem; }
+.lede { font-style: italic; color: var(--muted); font-size: 1.3rem; margin: 0 0 2rem; }
+h2 {
+  font-family: var(--sans); font-weight: 500; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted); margin: 0 0 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--rule);
+}
+section { margin-top: 3.5rem; }
+p { margin: 0 0 1rem; }
+ul { list-style: none; margin: 0; padding: 0; }
+.entries li { margin-bottom: 1.5rem; }
+.entries .title { font-weight: 500; font-size: 1.2rem; }
+.entries p { margin: .2rem 0 0; }
+.tag { font-family: var(--sans); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--rule); border-radius: 3px; padding: 1px 5px; vertical-align: 2px; margin-left: .3rem; }
+.aside { color: var(--muted); font-size: 1.05rem; }
+.list li { margin-bottom: 1rem; }
+.list .meta { display: block; font-family: var(--sans); font-size: .8rem; color: var(--muted); margin-top: .1rem; }
+footer { margin-top: 4rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); font-family: var(--sans); font-size: .9rem; }
+.colophon { color: var(--muted); font-size: .8rem; }
+@media (max-width: 480px) {
+  body { font-size: 1.0625rem; }
+  main { padding-top: 3rem; padding-left: 1rem; padding-right: 1rem; }
+  h1 { font-size: 2rem; }
+}
