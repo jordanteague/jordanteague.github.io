@@ -220,7 +220,7 @@ about = page("04", "About", f'<ul class="timeline">{tl}</ul>',
 <h2>Bio</h2>
 <p>I'm a founding partner and the chief strategy officer of <a href="https://campbellteague.com/jordan-teague/">Campbell Teague</a>, where I focus on the firm's long-term direction: growth, innovation, and attorney development. Inside the firm I'm the self-described "nerd in the basement," the one building the systems.</p>
 <p>I came to law from advertising, software development, and entrepreneurship, and have practiced across transactional work and litigation, including complex business disputes and class actions. I've won a federal bench trial and its appeal and tried an international arbitration in Paris.</p>
-<p>Today I advise emerging-technology organizations on questions without settled answers: regulatory frameworks, legal personhood, governance, and which jurisdiction's law applies. That has included advising a token issuer under the EU's MiCA regulation in its early days and serving as outside general counsel to The Graph Foundation.</p>
+<p>Today I advise emerging-technology organizations on questions without settled answers: regulatory frameworks, legal personhood, governance, and which jurisdiction's law applies.</p>
 <p>The thread through all of it is making expert judgment repeatable. The firm runs on a model in which project managers lead lawyer teams, and the tools I build apply the same idea to AI agents.</p>
 <p>J.D., Vanderbilt University Law School, where I was Senior Technology Editor of the <i>Vanderbilt Journal of Entertainment and Technology Law</i>. B.S., magna cum laude, in Mathematics-Economics from Furman University.</p>
 <h2>Contact</h2>
