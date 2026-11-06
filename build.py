@@ -73,7 +73,7 @@ def layout(slug, title, description, body):
 </main>
 <footer class="site"><div class="wrap">
   <p><a href="mailto:{EMAIL}">{EMAIL}</a> · <a href="https://www.linkedin.com/in/jordanteague">LinkedIn</a> · <a href="https://github.com/jordanteague">GitHub</a></p>
-  <p>© 2026 Jordan Teague. Personal site. Views are my own and not those of Campbell Teague or its clients. Nothing on this site is legal advice, and visiting it does not create an attorney-client relationship.</p>
+  <p>© 2026 Jordan Teague. Views are my own, not those of Campbell Teague or its clients.</p>
 </div></footer>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{{"token": "ef8682fee25f40e693a119872f97f20d"}}'></script><!-- End Cloudflare Web Analytics -->
 </body>
